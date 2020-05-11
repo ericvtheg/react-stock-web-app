@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { Layout, Row, Col } from 'antd';
+import 'antd/dist/antd.css';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import Header from './Header';
+import {StockBody, NewsBody, CardBody} from './CardBody';
+
+
+function Footer(){
+  return(
+    <div className="footer">
+      <a href="https://www.linkedin.com/in/ericventor/">
+        Designed by Eric Ventor
+      </a>
+    </div>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Layout style={{background: "white"}}>
+      <Header />
+      <Row>
+          <CardBody title="TWTR" type="card-ticker"/>
+          <Col className="news-stocks-col">
+            <Row className="height-limit">
+              <NewsBody />
+            </Row>
+            <Row className="height-limit">
+              <StockBody />
+            </Row>
+          </Col>
+      </Row>
+      <Footer />
+    </Layout>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
