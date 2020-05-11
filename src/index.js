@@ -4,7 +4,7 @@ import { Layout, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
 import Header from './Header';
-import {StockBody, NewsBody, CardBody} from './CardBody';
+import {StockBody, NewsBody, TickerBody} from './CardBody';
 
 
 function Footer(){
@@ -22,8 +22,10 @@ ReactDOM.render(
     <Layout style={{background: "white"}}>
       <Header />
       <Row>
-          <CardBody title="TWTR" type="card-ticker"/>
-          <Col className="news-stocks-col">
+          <Col flex={1} className="ticker-col">
+            <TickerBody title="TWTR"/>
+          </Col>
+          <Col flex={1} className="news-stocks-col">
             <Row className="height-limit">
               <NewsBody />
             </Row>

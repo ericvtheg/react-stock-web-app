@@ -9,7 +9,7 @@ function Header(){
         <Col flex={20}>
           <PageHeader
             className="site-page-header"
-            title="Stock Tickers"
+            title="Stock Tickr"
             subTitle="Quick & easy"
           />
         </Col>

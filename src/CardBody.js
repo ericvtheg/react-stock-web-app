@@ -1,40 +1,40 @@
 import React from 'react';
-import {Card, Row, Col, Switch} from 'antd';
+import {Card, Row, Col, Avatar, Statistic} from 'antd';
+import {CaretUpOutlined, CaretDownOutlined, AlignLeftOutlined} from '@ant-design/icons';
 
-function CardBody(props){
+function TickerBody(props){
   //fetch ticker content here
   //show loading while loading
     return(
       <Card title={props.title} className="card-ticker">
-          {TickerContents()}
+          <TickerContents />
       </Card>
     );
   }
 
-function TickerInfo(){
+function TickerContents(){
   return(
-    <Row className="ticker-info-row">
-      <Col flex={1}>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-      </Col>
-      <Col flex={1}>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
-        <Card className="card-ticker-info">test</Card>
+    <Row>
+      <TickerInfo title="High" />
+      <TickerInfo title="Low" />
+      <TickerInfo title="Volume" />
+      <TickerInfo title="Open" />
+      <TickerInfo title="Close" />
+      <TickerInfo title="Trading Day" />
+      <Col className="graph-col">
+        <Card className="card-graph">test</Card>
       </Col>
     </Row>
+  );
+}
+
+function TickerInfo(props){
+  return(
+    <Col flex={1} className="ticker-info-col">
+      <Row className="ticker-info-row ant-card-body">
+        <Statistic title={props.title} value={props.value} />
+      </Row>
+    </Col>
   );
 }
 
@@ -44,10 +44,10 @@ function NewsBody(){
   return(
     <>
       {/* <Switch checked={!loading} onChange={this.onChange} /> */}
-      <Card loading={true} title="News" className="card-news">
-          <NewsContents image="img" headline="This is a news headline" />
-          <NewsContents image="img" headline="This is a news headline" />
-          <NewsContents image="img" headline="This is a newasdfasdfasdfs headline" />
+      <Card title="News" className="card-news">
+          <NewsContents image="img" headline="A ‘much more severe’ selloff looms in the stock market, strategist warns" />
+          <NewsContents image="img" headline="He started the day with $77,000 — by midnight, he owed $9 million" />
+          <NewsContents image="img" headline="Pence plans to return to White House, while Fauci and others self-isolate after potential exposure to coronavirus" />
       </Card>
     </>
   );
@@ -55,18 +55,21 @@ function NewsBody(){
 
 function NewsContents(props){
   return(
-    <Row>
-      <Col flex={2} >
-        <Card style={{
-          position: 'absolute', left: '50%', top: '50%',
-          transform: 'translate(-50%, -50%)'}}>
-            <img src={props.image}></img>
-        </Card>
-      </Col>
-      <Col flex={8}>
-        <Card>{props.headline}</Card>
-      </Col>
-    </Row>
+    <Card>
+      <Row align="middle">
+        <Col flex={2} >
+          <Avatar 
+            shape="square" 
+            size="large" 
+            icon={<AlignLeftOutlined />} 
+            style={{margin:'2px'}}
+          />
+        </Col>
+        <Col flex={8}>
+          <li className="news-headline">{props.headline}</li>
+        </Col>
+      </Row>
+    </Card>
   );
 }
 
@@ -75,41 +78,56 @@ function StockBody(){
   //show loading while loading
   return(
     <Card title="Indexes" className="card-stocks">
-        <StockContents stockTitle="S&P 500" stockChange={15.04} stockChangePercent={3.05} />
-        <StockContents stockTitle="Nasdaq" stockChange={5.04} stockChangePercent={.67} />
-        <StockContents stockTitle="Russ 5000" stockChange={-10.01} stockChangePercent={-3.65} />
-        <StockContents stockTitle="DJI      " stockChange={-10.01} stockChangePercent={-3.65} />
+        <StockContents 
+          stockTitle="S&P 500&nbsp;&nbsp;&nbsp;"
+          stockPrice={292.44}
+          stockChange={4.76} 
+          stockChangePercent={1.65} />
+        <StockContents 
+          stockTitle="Nasdaq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+          stockPrice={9121.32}
+          stockChange={141.66} 
+          stockChangePercent={1.58} />
+        <StockContents 
+          stockTitle="Russ 5000"
+          stockPrice={29670.68}
+          stockChange={556.92} 
+          stockChangePercent={1.91} />
+        <StockContents 
+          stockTitle="DOW J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+          stockPrice={24331.32}
+          stockChange={455.52} 
+          stockChangePercent={1.91} />
     </Card>
   );
 }
 
 function StockContents(props){
+  let arrowDirection; 
+  if(props.stockChangePercent > 0) {
+    arrowDirection = <CaretUpOutlined />
+  }else{
+    arrowDirection = <CaretDownOutlined />
+  }
+
+  //event handle on click to switch between percent and actual value
+   
   return(
     <Row>
       <Col flex={5}>
-  <Card>{props.stockTitle}</Card>
+        <Card>{props.stockTitle}</Card>
       </Col>
       <Col flex={Math.abs(props.stockChangePercent /.2)}>
-        <Card style={{background: percToColor(props.stockChangePercent)}}>
-          {props.stockChange} ({props.stockChangePercent}%)</Card>
+        <Card style={{background: percToColor(props.stockChangePercent), whiteSpace: "pre"}}>
+          {arrowDirection}&nbsp;{props.stockChange.toLocaleString()} ({props.stockChangePercent}%)
+          <span>
+              &nbsp;{props.stockPrice.toLocaleString()}
+          </span>
+        </Card>
       </Col>
     </Row>
   );
 }
-
-
-
-function TickerContents(){
-  return(
-    <Row>
-      <Col className="graph-col">
-        <Card className="card-graph">test</Card>
-      </Col>
-      <TickerInfo />
-    </Row>
-  );
-}
-
 
 function percToColor(pct) {
   var percentColors = [
@@ -138,5 +156,5 @@ function percToColor(pct) {
 };
 
 
-export {CardBody, StockBody, NewsBody};
-export default CardBody;
+export {TickerBody, StockBody, NewsBody};
+export default TickerBody;
