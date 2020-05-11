@@ -47,7 +47,7 @@ node_modules/
 jspm_packages/
 
 #vscode
-.vscode
+.vscode/
 
 # TypeScript v1 declaration files
 typings/
