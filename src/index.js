@@ -21,7 +21,7 @@ ReactDOM.render(
     <Layout style={{background: "white"}}>
       <Header />
       <Layout style={{background: "white"}} >
-        <Row>
+        <Row style={{margin:"0px 20px"}}>
           <Col flex={"4 1 350px"} className="ticker-col antd-flex-grow-1">
             <TickerBody title="TWTR"/>
           </Col>

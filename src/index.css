@@ -30,7 +30,7 @@ div[class^='card-'], div[class*='card-']{
 }
 
 .card-ticker{
-  width: 100%;
+  width: auto;
   height: 100%;
   float: left;
   margin-bottom: 0px;
@@ -63,7 +63,7 @@ div[class^='card-'], div[class*='card-']{
 
 .news-and-stocks-col{
   width: auto;
-  margin: 0px 20px;
+  /* margin: 0px 20px; */
   padding-bottom: 10px;
   /* max-height: 800px; */
 }
@@ -93,6 +93,11 @@ div[class^='card-'], div[class*='card-']{
   width: auto;
   min-width: 100%;
   margin: 10px 0px 0px 0px;
+  overflow-y: scroll;
+}
+
+.stock-indexes{
+  min-width: 100%;
 }
 
 .footer{

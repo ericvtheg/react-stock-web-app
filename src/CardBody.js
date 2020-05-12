@@ -27,6 +27,16 @@ function TickerContents(){
   );
 }
 
+function TickerInfo(props){
+  return(
+    <Col flex={1}  className="ticker-info-col">
+      <Row className="ticker-info-row ant-card-body">
+        <Statistic  title={props.title} value={props.value} />
+      </Row>
+    </Col>
+  );
+}
+
 function TickerGraph() {
   const data = [
     {
@@ -71,16 +81,6 @@ function TickerGraph() {
   </Col>;
 }
 
-function TickerInfo(props){
-  return(
-    <Col flex={1}  className="ticker-info-col">
-      <Row className="ticker-info-row ant-card-body">
-        <Statistic  title={props.title} value={props.value} />
-      </Row>
-    </Col>
-  );
-}
-
 function NewsBody(){
   //fetch news content here
   //show loading while loading
@@ -88,7 +88,7 @@ function NewsBody(){
     <>
       {/* <Switch checked={!loading} onChange={this.onChange} /> */}
       <Card title="News" className="card-news">
-          <div className="articles-news" style={{marginRight:"22px"}}>
+          <div className="articles-news" style={{margin:"0px 22px 0px 0px", paddingBottom: "22px"}}>
             <NewsContents image="img" headline="A ‘much more severe’ selloff looms in the stock market, strategist warns" />
             <NewsContents image="img" headline="He started the day with $77,000 — by midnight, he owed $9 million" />
             <NewsContents image="img" headline="The stock rally is signaling an ‘abnormal’ economic recovery, not a V-shaped coronavirus rebound" />
@@ -123,26 +123,28 @@ function StockBody(){
   //show loading while loading
   return(
     <Card title="Indexes" style={{height:"auto"}} className="card-stocks">
+      <div>
         <StockContents 
-          stockTitle="S&P 500&nbsp;&nbsp;&nbsp;"
-          stockPrice={292.44}
+          stockTitle="S&P 500"
+          stockPrice={2922.44}
           stockChange={4.76} 
           stockChangePercent={1.65} />
         <StockContents 
-          stockTitle="Nasdaq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+          stockTitle="Nasdaq"
           stockPrice={9121.32}
           stockChange={141.66} 
           stockChangePercent={1.58} />
         <StockContents 
-          stockTitle="Russ 5000"
-          stockPrice={29670.68}
-          stockChange={556.92} 
-          stockChangePercent={1.91} />
-        <StockContents 
-          stockTitle="DOW J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+          stockTitle="DOW J"
           stockPrice={24331.32}
           stockChange={455.52} 
           stockChangePercent={1.91} />
+        <StockContents 
+          stockTitle="Russel 5000"
+          stockPrice={256331.32}
+          stockChange={455.52} 
+          stockChangePercent={1.91} />
+      </div>
     </Card>
   );
 }
@@ -158,18 +160,20 @@ function StockContents(props){
   //event handle on click to switch between percent and actual value
    
   return(
-    <Row>
-      <Col flex={1}>
-        <Card>{props.stockTitle}</Card>
-      </Col>
-      <Col flex={3}>
-        <Card style={{background: percToColor(props.stockChangePercent), whiteSpace: "pre"}}>
-            {arrowDirection}&nbsp;{props.stockChange.toLocaleString()} ({props.stockChangePercent}%)
-            <span>
-                &nbsp;{props.stockPrice.toLocaleString()}
-            </span>
-        </Card>
-      </Col>
+    <Row gutter={[8, 8]}>
+      <Card className="stock-indexes">
+        <Col>
+        {props.stockTitle}
+        </Col>
+        <Col 
+          style={{background: percToColor(props.stockChangePercent), textAlign:"right", whiteSpace: "nowrap"}}
+        >
+          {arrowDirection}&nbsp;{props.stockChange.toLocaleString()} ({props.stockChangePercent}%)
+          <span>
+              &nbsp;{props.stockPrice.toLocaleString()}
+          </span>
+        </Col>
+      </Card>
     </Row>
   );
 }
