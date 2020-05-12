@@ -6,7 +6,6 @@ import './index.css';
 import Header from './Header';
 import {StockBody, NewsBody, TickerBody} from './CardBody';
 
-
 function Footer(){
   return(
     <div className="footer">
@@ -16,16 +15,17 @@ function Footer(){
     </div>
   )
 }
-
+// xs={2} sm={4} md={6} lg={8} xl={8}
 ReactDOM.render(
   <React.StrictMode>
     <Layout style={{background: "white"}}>
       <Header />
-      <Row>
-          <Col flex={1} className="ticker-col">
+      <Layout style={{background: "white"}} >
+        <Row style={{width:"100%", height:"100%"}}>
+          <Col flex={"1 0 350px"} className="ticker-col">
             <TickerBody title="TWTR"/>
           </Col>
-          <Col flex={1} className="news-stocks-col">
+          <Col flex={"1 0 200px"} className="news-and-stocks-col">
             <Row className="height-limit">
               <NewsBody />
             </Row>
@@ -33,7 +33,8 @@ ReactDOM.render(
               <StockBody />
             </Row>
           </Col>
-      </Row>
+        </Row>
+      </Layout>
       <Footer />
     </Layout>
   </React.StrictMode>,

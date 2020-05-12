@@ -30,9 +30,9 @@ function TickerContents(){
 
 function TickerInfo(props){
   return(
-    <Col flex={1} className="ticker-info-col">
+    <Col flex={1}  className="ticker-info-col">
       <Row className="ticker-info-row ant-card-body">
-        <Statistic title={props.title} value={props.value} />
+        <Statistic  title={props.title} value={props.value} />
       </Row>
     </Col>
   );
@@ -47,7 +47,7 @@ function NewsBody(){
       <Card title="News" className="card-news">
           <NewsContents image="img" headline="A ‘much more severe’ selloff looms in the stock market, strategist warns" />
           <NewsContents image="img" headline="He started the day with $77,000 — by midnight, he owed $9 million" />
-          <NewsContents image="img" headline="Pence plans to return to White House, while Fauci and others self-isolate after potential exposure to coronavirus" />
+          {/* <NewsContents image="img" headline="Pence plans to return to White House, while Fauci and others self-isolate after potential exposure to coronavirus" /> */}
       </Card>
     </>
   );
@@ -62,7 +62,7 @@ function NewsContents(props){
             shape="square" 
             size="large" 
             icon={<AlignLeftOutlined />} 
-            style={{margin:'2px'}}
+            style={{margin:'5px'}}
           />
         </Col>
         <Col flex={8}>

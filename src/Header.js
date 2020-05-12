@@ -25,8 +25,8 @@ function Header(){
             />
           </AutoComplete>
         </Col>
-        <Col flex ={1}>
-          <Clock/>
+        <Col flex ={1} style={{margin:"0px 10px"}}>
+          <Clock />
         </Col>
       </Row>
 
