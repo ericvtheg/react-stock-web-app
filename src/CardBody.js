@@ -45,9 +45,12 @@ function NewsBody(){
     <>
       {/* <Switch checked={!loading} onChange={this.onChange} /> */}
       <Card title="News" className="card-news">
-          <NewsContents image="img" headline="A ‘much more severe’ selloff looms in the stock market, strategist warns" />
-          <NewsContents image="img" headline="He started the day with $77,000 — by midnight, he owed $9 million" />
-          {/* <NewsContents image="img" headline="Pence plans to return to White House, while Fauci and others self-isolate after potential exposure to coronavirus" /> */}
+          <div className="articles-news" style={{marginRight:"22px"}}>
+            <NewsContents image="img" headline="A ‘much more severe’ selloff looms in the stock market, strategist warns" />
+            <NewsContents image="img" headline="He started the day with $77,000 — by midnight, he owed $9 million" />
+            <NewsContents image="img" headline="The stock rally is signaling an ‘abnormal’ economic recovery, not a V-shaped coronavirus rebound" />
+            <NewsContents image="img" headline="Tesla’s California plant reopens despite shutdown order, Elon Musk dares county to arrest him" />
+          </div>
       </Card>
     </>
   );
@@ -55,18 +58,17 @@ function NewsBody(){
 
 function NewsContents(props){
   return(
-    <Card>
-      <Row align="middle">
-        <Col flex={2} >
+    <Card style={{display:"inline-block"}}>
+      <Row>
+        <Col span={4} style={{marginRight: "5px"}}>
           <Avatar 
             shape="square" 
             size="large" 
             icon={<AlignLeftOutlined />} 
-            style={{margin:'5px'}}
           />
         </Col>
-        <Col flex={8}>
-          <li className="news-headline">{props.headline}</li>
+        <Col span={19}>
+          {props.headline}
         </Col>
       </Row>
     </Card>
@@ -78,6 +80,7 @@ function StockBody(){
   //show loading while loading
   return(
     <Card title="Indexes" className="card-stocks">
+      <div>
         <StockContents 
           stockTitle="S&P 500&nbsp;&nbsp;&nbsp;"
           stockPrice={292.44}
@@ -98,6 +101,7 @@ function StockBody(){
           stockPrice={24331.32}
           stockChange={455.52} 
           stockChangePercent={1.91} />
+      </div>
     </Card>
   );
 }
@@ -117,14 +121,14 @@ function StockContents(props){
       <Col flex={5}>
         <Card>{props.stockTitle}</Card>
       </Col>
-      <Col flex={Math.abs(props.stockChangePercent /.2)}>
-        <Card style={{background: percToColor(props.stockChangePercent), whiteSpace: "pre"}}>
+    <Col flex={Math.abs(props.stockChangePercent / .5)}>
+      <Card style={{background: percToColor(props.stockChangePercent), whiteSpace: "pre"}}>
           {arrowDirection}&nbsp;{props.stockChange.toLocaleString()} ({props.stockChangePercent}%)
           <span>
               &nbsp;{props.stockPrice.toLocaleString()}
           </span>
-        </Card>
-      </Col>
+      </Card>
+    </Col>
     </Row>
   );
 }
@@ -151,7 +155,7 @@ function percToColor(pct) {
       g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
       b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
   };
-  return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+  return 'rgb(' + [color.r, color.g, color.b].join(',') + ', 0.8)';
   // or output as hex if preferred
 };
 

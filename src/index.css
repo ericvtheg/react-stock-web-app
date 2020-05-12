@@ -26,6 +26,7 @@ div[class^='card-'], div[class*='card-']{
 
 .ticker-col{
   margin:0px 10px 10px 10px;
+  /* max-height: 800px; */
 }
 
 .card-ticker{
@@ -62,7 +63,8 @@ div[class^='card-'], div[class*='card-']{
 
 .news-and-stocks-col{
   width: auto;
-  margin: 0px 10px;
+  margin: 0px 20px;
+  /* max-height: 800px; */
 }
 
 .height-limit{
@@ -76,6 +78,10 @@ div[class^='card-'], div[class*='card-']{
   overflow-y: scroll;
 }
 
+.articles-news{
+  position: absolute;
+}
+
 .news-headline{
   /* would like to make this not static */
   max-width:100%;
@@ -85,8 +91,7 @@ div[class^='card-'], div[class*='card-']{
 .card-stocks{
   width: auto;
   min-width: 100%;
-  margin: 10px 0px;
-  overflow-y: auto;
+  margin: 10px 0px 0px 0px;
 }
 
 .footer{
