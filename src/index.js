@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Layout, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
@@ -15,17 +15,17 @@ function Footer(){
     </div>
   )
 }
-// xs={2} sm={4} md={6} lg={8} xl={8}
+
 ReactDOM.render(
   <React.StrictMode>
     <Layout style={{background: "white"}}>
       <Header />
       <Layout style={{background: "white"}} >
-        <Row style={{width:"100%", height:"100%"}}>
-          <Col flex={"1 0 350px"} className="ticker-col">
+        <Row style={{width:"100%", height:window.innerHeight}}>
+          <Col flex={"4 1 350px"} className="ticker-col antd-flex-grow-1">
             <TickerBody title="TWTR"/>
           </Col>
-          <Col flex={"1 0 200px"} className="news-and-stocks-col">
+          <Col flex={"2 0 200px"} className="news-and-stocks-col">
             <Row className="height-limit">
               <NewsBody />
             </Row>

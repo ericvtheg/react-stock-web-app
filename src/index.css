@@ -33,14 +33,13 @@ div[class^='card-'], div[class*='card-']{
   width: 100%;
   height: 100%;
   float: left;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .card-graph{
-  float:left;
-  margin-left: -5px;
   width: 100%;
-  height: 550px;
+  height: 100%;
+  /* height: 550px; */
 }
 
 .graph-col{
@@ -59,11 +58,13 @@ div[class^='card-'], div[class*='card-']{
 
 .ticker-info-col{
   min-width: 5%;
+  margin-top: -10px
 }
 
 .news-and-stocks-col{
   width: auto;
   margin: 0px 20px;
+  padding-bottom: 10px;
   /* max-height: 800px; */
 }
 
