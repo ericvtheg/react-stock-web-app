@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Layout, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
@@ -21,7 +21,7 @@ ReactDOM.render(
     <Layout style={{background: "white"}}>
       <Header />
       <Layout style={{background: "white"}} >
-        <Row style={{width:"100%", height:window.innerHeight}}>
+        <Row>
           <Col flex={"4 1 350px"} className="ticker-col antd-flex-grow-1">
             <TickerBody title="TWTR"/>
           </Col>

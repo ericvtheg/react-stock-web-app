@@ -1,4 +1,4 @@
-import React, { PureComponent }  from 'react';
+import React, {  }  from 'react';
 import {Card, Row, Col, Avatar, Statistic} from 'antd';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import {CaretUpOutlined, CaretDownOutlined, AlignLeftOutlined} from '@ant-design/icons';
