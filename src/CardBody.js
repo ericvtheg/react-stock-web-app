@@ -2,6 +2,7 @@ import React, {  }  from 'react';
 import {Card, Row, Col, Avatar, Statistic} from 'antd';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import {CaretUpOutlined, CaretDownOutlined, AlignLeftOutlined} from '@ant-design/icons';
+import { render } from '@testing-library/react';
 
 function TickerBody(props){
   //fetch ticker content here
@@ -119,7 +120,7 @@ function NewsContents(props){
 }
 
 function StockBody(){
-  //fetch stock content here
+
   //show loading while loading
   return(
     <Card title="Indexes" style={{height:"auto"}} className="card-stocks">
@@ -149,33 +150,43 @@ function StockBody(){
   );
 }
 
-function StockContents(props){
-  let arrowDirection; 
-  if(props.stockChangePercent > 0) {
-    arrowDirection = <CaretUpOutlined />
-  }else{
-    arrowDirection = <CaretDownOutlined />
+class  StockContents extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      indexes: []
+    };
+  }
+  //fetch stock content here
+  componentDidMount(){
   }
 
   //event handle on click to switch between percent and actual value
-   
-  return(
-    <Row gutter={[8, 8]}>
-      <Card className="stock-indexes">
-        <Col>
-        {props.stockTitle}
-        </Col>
-        <Col 
-          style={{background: percToColor(props.stockChangePercent), textAlign:"right", whiteSpace: "nowrap"}}
-        >
-          {arrowDirection}&nbsp;{props.stockChange.toLocaleString()} ({props.stockChangePercent}%)
-          <span>
-              &nbsp;{props.stockPrice.toLocaleString()}
-          </span>
-        </Col>
-      </Card>
-    </Row>
-  );
+  render(){
+    let arrowDirection; 
+    if(this.props.stockChangePercent > 0) {
+      arrowDirection = <CaretUpOutlined />
+    }else{
+      arrowDirection = <CaretDownOutlined />
+    }
+    return(
+      <Row gutter={[8, 8]}>
+        <Card className="stock-indexes">
+          <Col>
+          {this.props.stockTitle}
+          </Col>
+          <Col 
+            style={{background: percToColor(this.props.stockChangePercent), textAlign:"right", whiteSpace: "nowrap"}}
+          >
+            {arrowDirection}&nbsp;{this.props.stockChange.toLocaleString()} ({this.props.stockChangePercent}%)
+            <span>
+                &nbsp;{this.props.stockPrice.toLocaleString()}
+            </span>
+          </Col>
+        </Card>
+      </Row>
+    );
+  }
 }
 
 function percToColor(pct) {

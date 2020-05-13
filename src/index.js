@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Layout, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
-import Header from './Header';
+import Header from './components/Header';
 import {StockBody, NewsBody, TickerBody} from './CardBody';
 
 function Footer(){
