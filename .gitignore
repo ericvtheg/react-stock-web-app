@@ -3,7 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=node,react
 
 #config file w/ api key
-src/config/
+server/config/
 
 ### Node ###
 # Logs

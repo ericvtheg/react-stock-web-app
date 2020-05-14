@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Layout, Row, Col } from 'antd';
-import 'antd/dist/antd.css';
 import './index.css';
-import Header from './components/Header';
-import {StockBody, NewsBody, TickerBody} from './CardBody';
+import { Header, IndexesBody, NewsBody, TickerBody } from './components/CardBody';
 
 function Footer(){
   return(
@@ -30,7 +28,7 @@ ReactDOM.render(
               <NewsBody />
             </Row>
             <Row className="height-limit">
-              <StockBody />
+              <IndexesBody />
             </Row>
           </Col>
         </Row>

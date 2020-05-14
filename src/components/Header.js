@@ -67,4 +67,4 @@ class Clock extends React.Component {
   }
 }
 
-export default Header;
+export {Header};
