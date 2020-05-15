@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/alphavantage/:functionType/:input', (req, res) => {
     const input = req.params.input;
     const functionType = req.params.functionType
-    fetch(buildAlphaVantageURL(input, functionType), {headers: headers})
+    fetch(buildAlphaVantageURL(functionType, input), {headers: headers})
         .then((response) => {
             if(response.ok){
                 return response.json();

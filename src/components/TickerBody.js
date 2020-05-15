@@ -1,79 +1,82 @@
 import React from 'react';
 import { Card, Row, Col, Statistic } from 'antd';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { TickerGraph } from './TickerGraph';
+import {isGain} from '../helpers/IsGain';
+import { FormatNumber } from '../helpers/FormatNumber';
 
-function TickerBody(props) {
-  //fetch ticker content here
-  //show loading while loading
-  return (
-  <Card title={props.title} className="card-ticker">
-    <TickerContents />
-  </Card>);
+class TickerBody extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: {}
+    };
+  }
+  componentDidMount() {
+    fetch("http://localhost:3000/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+  FormatTitle(stockTicker, values){
+    let title = 
+      <span title={"$"+FormatNumber(this.state.items["Change"])}> 
+        {stockTicker} &nbsp;
+        {isGain(values["Change-percent"])} &nbsp;
+        ${FormatNumber(values["Price"])} &nbsp;
+      </span>
+    return title
+  }
+
+  render(){
+    return (
+    <Card 
+      loading={!this.state.isLoaded}
+      title={this.FormatTitle(this.props.stockTicker, this.state.items)} 
+      className="card-ticker"
+    >
+      <TickerContents quote={this.state.items}/>
+    </Card>);
+    }
 }
 
-function TickerContents() {
-  return (<Row>
-    <TickerInfo title="High" />
-    <TickerInfo title="Low" />
-    <TickerInfo title="Volume" />
-    <TickerInfo title="Open" />
-    <TickerInfo title="Close" />
-    <TickerInfo title="Trading Day" />
-    <TickerGraph />
-  </Row>);
+function TickerContents(props) {
+  const quote = props.quote;
+  return (
+    <Row>
+      <TickerInfo key="Open" title="Open" value={FormatNumber(quote["Open"])}  />
+      <TickerInfo key="Close" title="Close" value={FormatNumber(quote["Close"])} />
+      <TickerInfo key="Volume" title="Volume" value={FormatNumber(quote["Volume"])} />
+      <TickerInfo key="High" title="High" value={FormatNumber(quote["High"])} />
+      <TickerInfo key="Low" title="Low" value={FormatNumber(quote["Low"])} />
+      {/* <TickerInfo key="Trading Day" title="Trading Day" value={quote["Trading-day"]}  /> */}
+      <TickerGraph stockTicker={quote["Symbol"]}/>
+    </Row>
+  );
 }
 
 function TickerInfo(props) {
-  return (<Col flex={1} className="ticker-info-col">
-    <Row className="ticker-info-row ant-card-body">
-      <Statistic title={props.title} value={props.value} />
-    </Row>
-  </Col>);
-}
-
-function TickerGraph() {
-  const data = [
-    {
-      name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-    },
-    {
-      name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-    },
-    {
-      name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-    },
-    {
-      name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-    },
-    {
-      name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-    },
-    {
-      name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-    },
-    {
-      name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-    },
-  ];
-  
-  return <Col className="graph-col">
-    <Card className="card-graph">
-      <ResponsiveContainer aspect={1.7} width="100%" height="100%">
-        <LineChart data={data} margin={{
-          top: 5, right: 30, left: 20, bottom: 5,
-        }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="amt" stroke="#50ef9d" />
-        </LineChart>
-      </ResponsiveContainer>
-    </Card>
-  </Col>;
+  return (
+    <Col flex={1} className="ticker-info-col">
+      <Row className="ticker-info-row ant-card-body">
+        <Statistic title={props.title} value={props.value} />
+      </Row>
+    </Col>
+  );
 }
 
 export {TickerBody};

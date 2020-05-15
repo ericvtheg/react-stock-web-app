@@ -1,7 +1,7 @@
 const config = require('../config/config.json');
 
 //AlphaVantage
-function buildAlphaVantageURL(input, functionType) {
+function buildAlphaVantageURL(functionType, input) {
     const alphaVantageKey = '&apikey=' + config["alphaVantageKey"];
     const baseURL = 'https://www.alphavantage.co/query?function=';
     let part2URL;
@@ -9,7 +9,7 @@ function buildAlphaVantageURL(input, functionType) {
     return baseURL + functionType + part2URL + input + alphaVantageKey;
 }
 
-function buildNewsAPIURL(input, functionType){
+function buildNewsAPIURL(functionType, input){
     //Keyword or phrase. Eg: find all articles containing the word 'Microsoft'.
     //Language. Eg: find all articles written in English.
     //sort by Date published

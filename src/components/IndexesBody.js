@@ -1,18 +1,19 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
-import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { percentToColor } from "../helpers/PercentToColor";
+import {isGain} from '../helpers/IsGain';
+import { FormatNumber } from '../helpers/FormatNumber';
 
 function IndexesBody() {
-  //show loading while loading
   return (
-  <Card title="Indexes" style={{ height: "auto" }} className="card-stocks">
-    <div>
-      <IndexesContents key="SPY" stockTicker="SPY" stockTitle="S&P 500" />
-      {/* <IndexesContents key="NDAQ" stockTicker="NDAQ" stockTitle="Nasdaq" stockPrice={9121.32} stockChange={141.66} stockChangePercent={1.58} />
-      <IndexesContents key="DJI" stockTicker="DIA" stockTitle="DOW J" stockPrice={24331.32} stockChange={455.52} stockChangePercent={1.91} /> */}
-    </div>
-  </Card>);
+    <Card title="Indexes" style={{ height: "auto" }} className="card-stocks">
+      <div>
+        <IndexesContents key="SPY" stockTicker="SPY" stockTitle="S&P 500" />
+        <IndexesContents key="NDAQ" stockTicker="NDAQ" stockTitle="Nasdaq" />
+        <IndexesContents key="RUT" stockTicker="^RUT" stockTitle="Russell 2000 " />
+      </div>
+    </Card>
+  );
 }
 
 class IndexesContents extends React.Component {
@@ -25,7 +26,7 @@ class IndexesContents extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:3001/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
+    fetch("http://localhost:3000/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
       .then(res => res.json())
       .then(
         (result) => {
@@ -45,22 +46,17 @@ class IndexesContents extends React.Component {
   }
   //event handle on click to switch between percent and actual value
   render() {
-    let arrowDirection;
-    // this.state.items.change[0] === '-' ? arrowDirection = <CaretUpOutlined />: arrowDirection = <CaretDownOutlined />
-    
     return (
       <Row gutter={[8, 8]}>
         <Card loading={!this.state.isLoaded} className="stock-indexes">
           <Col>
             {this.props.stockTitle}
-          </Col>
-          <Col style={{ 
-            background: percentToColor(this.state.items.change), 
-            textAlign: "right", 
-            whiteSpace: "nowrap" }}>
-            {arrowDirection}&nbsp;{this.state.items.change}
-            <span>
-              &nbsp;{this.state.items.price}
+            <span 
+              title={this.state.items["Change"]}
+              style={{float:"right"}}
+            >
+              {isGain(this.state.items["Change-percent"])}
+              &nbsp; {FormatNumber(this.state.items.Price)}
             </span>
           </Col>
         </Card>
