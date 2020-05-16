@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
-import { percentToColor } from "../helpers/PercentToColor";
 import {isGain} from '../helpers/IsGain';
 import { FormatNumber } from '../helpers/FormatNumber';
 
@@ -26,11 +25,10 @@ class IndexesContents extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:3000/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
+    fetch("http://localhost:3001/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           this.setState({
             isLoaded: true,
             items: result
@@ -52,7 +50,7 @@ class IndexesContents extends React.Component {
           <Col>
             {this.props.stockTitle}
             <span 
-              title={this.state.items["Change"]}
+              title={"$"+this.state.items["Change"]}
               style={{float:"right"}}
             >
               {isGain(this.state.items["Change-percent"])}

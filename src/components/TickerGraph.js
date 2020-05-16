@@ -7,7 +7,7 @@ export class TickerGraph extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: {},
+      items: [],
       type: "TIME_SERIES_DAILY",
       interval: null
     };
@@ -34,8 +34,8 @@ export class TickerGraph extends React.Component {
   }
 
   fetchGraph(){
-    fetch("http://localhost:3000/alphavantage/" + 
-    this.state.type + "/" + this.props.stockTicker)
+    fetch("http://localhost:3001/alphavantage/" + 
+      this.state.type + "/" + this.props.stockTicker)
     .then(res => res.json())
     .then((result) => {
       this.setState({
@@ -55,7 +55,6 @@ export class TickerGraph extends React.Component {
     const domains = this.calculateDomains(data);
     const lineDomain = domains[0];
     const barDomain = domains[1];
-    console.log(domains);
     return(
       <Col className = "graph-col" >
         <Card loading={!this.state.isLoaded} className="card-graph">

@@ -3,16 +3,42 @@ const moment = require('moment');
 function JSONHandler(functionType, data){
     
     switch(functionType){
-        case "GLOBAL_QUOTE":
+        case 'GLOBAL_QUOTE':
             return endQuote(data);
-            break;
-        case "TIME_SERIES_DAILY":
+        case 'TIME_SERIES_DAILY':
             return seriesDaily(data);
+        case 'NEWS':
+            return news(data);
+        case 'SECTOR':
+            return sector(data);
         default:
             return data;
             break;
     }
+}
+
+function news(data){
+    return data;
+}
+
+function sector(data){
+    let newJSON = JSON.stringify(data);
+    let keys = 
+    [
+     "\"Rank A: Real-Time Performance\":"
+    ];
+    let keysReplace = 
+    [
+    "\"SectorPerformance\":"
+    ];
     
+    for(let i  = 0; i < keys.length; i++){ 
+        newJSON = newJSON.replace(keys[i], keysReplace[i]);
+    }
+
+    newJSON = JSON.parse(newJSON)
+
+    return (newJSON["SectorPerformance"]);
 }
 
 function endQuote(data){
@@ -42,7 +68,7 @@ function endQuote(data){
     newJSON["Change"] = parseFloat(newJSON["Change"]).toFixed(2)
     newJSON["Change-percent"] = parseFloat(newJSON["Change-percent"]).toFixed(2)
 
-    return (newJSON);
+    return newJSON;
 }
 
 function seriesDaily(data){
@@ -84,7 +110,7 @@ function seriesDaily(data){
 
 
 
-    return (retArray);
+    return retArray;
 }
 
 exports.JSONHandler = JSONHandler;

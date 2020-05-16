@@ -14,7 +14,7 @@ class TickerBody extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:3000/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
+    fetch("http://localhost:3001/alphavantage/GLOBAL_QUOTE/"+this.props.stockTicker)
       .then(res => res.json())
       .then(
         (result) => {

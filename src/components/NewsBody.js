@@ -2,33 +2,96 @@ import React from 'react';
 import { Card, Row, Col, Avatar } from 'antd';
 import { AlignLeftOutlined } from '@ant-design/icons';
 
-function NewsBody() {
-  //fetch news content here
-  //show loading while loading
-  return (
-    <div className="articles-news">
-      <Card title="News" className="card-news">
-          <NewsContents image="img" headline="A ‘much more severe’ selloff looms in the stock market, strategist warns" />
-          <NewsContents image="img" headline="He started the day with $77,000 — by midnight, he owed $9 million" />
-          <NewsContents image="img" headline="The stock rally is signaling an ‘abnormal’ economic recovery, not a V-shaped coronavirus rebound" />
-          <NewsContents image="img" headline="Tesla’s California plant reopens despite shutdown order, Elon Musk dares county to arrest him" />
-      </Card>
-    </div>
-  );
+class NewsBody extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: {}
+    };
+  }
+  componentDidMount() {
+    fetch("http://localhost:3001/news")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+  conditionalRender(){
+    if (this.state.isLoaded){
+      const newsCards = [];
+      const newsItems = this.state.items.articles;
+      let headline, imageURL, url, loaded;
+      for (let i = 0; i < newsItems.length; i++) {
+        headline = newsItems[i].title;
+        imageURL = newsItems[i].urlToImage;
+        url = newsItems[i].url;
+        loaded = this.state.isLoaded;
+        newsCards.push(
+          <>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <NewsContents loaded={loaded} image={imageURL} headline={headline} />
+            </a>
+          </>
+        )
+      }
+      return newsCards;
+    }else{
+      return <BlankContents />
+    }
+  }
+  render(){
+    const display = this.conditionalRender();
+    return (
+      <div className="articles-news">
+        <Card title="News" className="card-news">
+          {display}
+        </Card>
+      </div>
+    );
+  }
 }
 
 function NewsContents(props) {
   return (
     <Row style={{width: "100%"}}>
-      <Card loading={true} className="article-single">
-        <Col span={4} style={{ marginRight: "5px" }}>
-          <Avatar shape="square" size="large" icon={<AlignLeftOutlined />} />
-        </Col>
-        <Col span={19}>
-          {props.headline}
-        </Col>
+      <Card loading={!props.loaded} className="article-single ant-btn-primary">
+        <Row>
+          <Col span={3} style={{marginRight: "10px"}}>
+            <Avatar 
+              shape="square" 
+              size="large" 
+              src={props.image} 
+            />
+          </Col>
+          <Col span={19}>
+            {props.headline}
+          </Col>
+        </Row>
       </Card>
     </Row>
+  );
+}
+
+function BlankContents(){
+  return(
+    <>
+        <NewsContents loaded={false} image={<AlignLeftOutlined />} headline="" />
+        <NewsContents loaded={false} image={<AlignLeftOutlined />} headline="" />
+        <NewsContents loaded={false} image={<AlignLeftOutlined />} headline="" />
+    </>
   );
 }
 

@@ -10,10 +10,10 @@ function buildAlphaVantageURL(functionType, input) {
 }
 
 function buildNewsAPIURL(functionType, input){
-    //Keyword or phrase. Eg: find all articles containing the word 'Microsoft'.
-    //Language. Eg: find all articles written in English.
-    //sort by Date published
-    return null
+    const newsAPIKey = '&apiKey=' + config["newsAPIkey"];
+    const baseURL = 'https://newsapi.org/v2/top-headlines?category=business&country=us';
+    const URL = baseURL + newsAPIKey;
+    return URL;
 }
 
 exports.buildAlphaVantageURL = buildAlphaVantageURL;

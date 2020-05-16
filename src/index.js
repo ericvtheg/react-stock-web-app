@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Layout, Row, Col } from 'antd';
 import './index.css';
-import { Header, IndexesBody, NewsBody, TickerBody, Footer } from './components/CardBody';
+import { Header, IndexesBody, NewsBody, TickerBody, SectorsBody, Footer } from './components/CardBody';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,10 +16,10 @@ ReactDOM.render(
           </Col>
           <Col flex={"2 0 200px"} className="news-and-stocks-col">
             <Row className="height-limit">
-              <NewsBody />
+              <NewsBody keyword=""/>
             </Row>
             <Row className="height-limit">
-              <IndexesBody />
+              <SectorsBody />
             </Row>
           </Col>
         </Row>
