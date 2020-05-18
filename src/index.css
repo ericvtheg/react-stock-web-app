@@ -29,6 +29,10 @@ code {
   transition: all .3s ease-in;
 }
 
+.light-gray{
+  color: #a3a3a3
+}
+
 .searchBar{
   border-radius: 5px;
   margin: 0px 10px;
@@ -80,6 +84,7 @@ div[class^='card-'], div[class*='card-']{
 .news-and-stocks-col{
   width: auto;
   padding-bottom: 10px;
+  min-height: 600px;
 }
 
 .height-limit{

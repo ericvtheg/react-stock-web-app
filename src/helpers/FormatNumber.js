@@ -1,3 +1,3 @@
-export function FormatNumber(value) {
+export function formatNumber(value) {
   return parseFloat(value).toLocaleString();
 }

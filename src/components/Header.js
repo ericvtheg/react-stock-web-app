@@ -2,7 +2,7 @@ import React from 'react';
 import {PageHeader, AutoComplete, Row, Col, Input} from 'antd';
 
 
-function Header(){
+function Header(props){
   return(
     <>
       <Row align="middle">
@@ -20,9 +20,13 @@ function Header(){
             onSelect={null}
             onSearch={null}
           >
-            <Input.Search
-              placeholder="TWTR"
-            />
+          <Input.Search
+            style={{
+              fontSize: 12,
+            }}
+            placeholder="AAPL"
+            onSearch={props.searchFunction} enterButton
+          />
           </AutoComplete>
         </Col>
         <Col flex ={1} style={{margin:"0px 10px"}}>
@@ -46,10 +50,6 @@ class Clock extends React.Component {
       () => this.tick(),
       1000
     );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
   }
 
   tick() {

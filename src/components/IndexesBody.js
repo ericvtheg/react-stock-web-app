@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
-import {isGain} from '../helpers/IsGain';
-import { FormatNumber } from '../helpers/FormatNumber';
+import { isGain } from '../helpers/isGain';
+import { formatNumber } from '../helpers/formatNumber';
 
 function IndexesBody() {
   return (
@@ -54,7 +54,7 @@ class IndexesContents extends React.Component {
               style={{float:"right"}}
             >
               {isGain(this.state.items["Change-percent"])}
-              &nbsp; {FormatNumber(this.state.items.Price)}
+              &nbsp; {formatNumber(this.state.items.Price)}
             </span>
           </Col>
         </Card>

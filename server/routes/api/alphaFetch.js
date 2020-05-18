@@ -1,7 +1,7 @@
-const { buildAlphaVantageURL } = require("../../services/URLBuilders");
+const { buildAlphaVantageURL } = require('../../services/URLBuilders');
 const { JSONHandler } = require("../../services/JSONHandler");
 const fetch = require('node-fetch');
-const { headers } = require("./coordinator");
+const { headers } = require('./coordinator');
 
 
 function alphaFetch(functionType, input, res) {
@@ -15,10 +15,15 @@ function alphaFetch(functionType, input, res) {
       }
     })
     .then(data => {
-      let newJSON = JSONHandler(functionType, data);
+      let newJSON = JSONHandler(functionType, data, input);
       res.send(newJSON);
     })
-    .catch(err => console.log("error occurred: " + err));
+    .catch(err => {
+        console.log('error occurred: ' + err);
+        res.status(500).send(
+          {error: 'Invalid input or overwhelmed server. Please try again later.'}
+        );
+      });
 }
 
 exports.alphaFetch = alphaFetch;

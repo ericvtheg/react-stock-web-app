@@ -17,7 +17,13 @@ function newsFetch(functionType, input, res){
           res.send(newJSON);
       })
       .catch(
-          err => console.log("error occurred: " + err)
+          err => {
+              console.log("error occurred: " + err);
+              res.status(500).send(
+                {error:'Unable to load news. The server is probably overwhelmed. Please try again later.'}
+              );
+              
+            }
       )
 }
 
