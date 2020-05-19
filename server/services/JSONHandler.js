@@ -6,13 +6,13 @@ function JSONHandler(functionType, data, input){
             return endQuote(data);
         case 'TIME_SERIES_INTRADAY':
             let interval = input[1];
-            return seriesInterval(data, "\"Time Series \\("+ interval +"\\)\":", true);
+            return seriesInterval(data, "\"Time Series \\("+ interval +"\\)\":", 0);
         case 'TIME_SERIES_DAILY':
-            return seriesInterval(data, "\"Time Series \\(Daily\\)\":", false);
+            return seriesInterval(data, "\"Time Series \\(Daily\\)\":", 1);
         case 'TIME_SERIES_WEEKLY':
-            return seriesInterval(data, "\"Weekly Time Series\":", false);
+            return seriesInterval(data, "\"Weekly Time Series\":", 2);
         case 'TIME_SERIES_MONTHLY':
-            return seriesInterval(data, "\"Monthly Time Series\":", false);
+            return seriesInterval(data, "\"Monthly Time Series\":", 3);
         case 'NEWS':
             return news(data);
         case 'SECTOR':
@@ -77,7 +77,7 @@ function endQuote(data){
     return newJSON;
 }
 
-function seriesInterval(data, interval, isIntraDay){
+function seriesInterval(data, interval, rangeType){
     let newJSON = JSON.stringify(data);
     let keys = 
     [
@@ -111,7 +111,7 @@ function seriesInterval(data, interval, isIntraDay){
         close = parseFloat(tempJSON["Close"]).toFixed(2);
         close = parseFloat(tempJSON["Close"]).toFixed(2);
         volume = tempJSON["Volume"];
-        date = formatDate(key, isIntraDay);
+        date = formatDate(key, rangeType);
 
         tempJSON = {date, open, high, low, close, volume};
         retArray.unshift(tempJSON);
@@ -123,11 +123,19 @@ function seriesInterval(data, interval, isIntraDay){
     return retArray;
 }
 
-function formatDate(date, isIntraDay){
-    if(!isIntraDay)
-        return moment(date, "YYYY-MM-DD").format("MM/YY");
-
-    return moment(date, "YYYY-MM-DD h:mm:ss").format("ddd h:mm");
+function formatDate(date, rangeType){
+    switch (rangeType){
+        case 0:
+            return moment(date, "YYYY-MM-DD h:mm:ss").format("ddd h:mm");
+        case 1:
+            return moment(date, "YYYY-MM-DD").format("MM/DD");
+        case 2:
+            return moment(date, "YYYY-MM-DD").format("MM/YY");
+        case 3:
+            return moment(date, "YYYY-MM-DD").format("MM/YY");
+        default:
+            return moment(date, "YYYY-MM-DD").format("MM/YY");
+    }
 }
 
 

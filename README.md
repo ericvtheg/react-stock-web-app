@@ -1,68 +1,65 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## StockTickr
 
-## Available Scripts
+This project was bootstrapped this project with [Create React App](https://github.com/facebook/create-react-app) and [Ant Design](https://ant.design)
 
-In the project directory, you can run:
+I have a keen interest for investing and have been wanting to showcase some of my fullstack experience with a React web app. The app's purpose is to be able to show live business news, market performance, and individual stock performance to help make better investment decisions.
 
-### `npm start`
+The reason I chose to use React for this web application is for the capability of consistently updating with realtime data. Unfortunately the free apis I implemented don't quite adhere to the demand, and often temporarily disable me from making further requests. Regardless using the React framework enabled me to create an extremely smooth feel for the changing components. And if I were to upgrade the API plan I would be able to easily add the realtime data capability.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Mantra
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Do as much server processing as possible, and use the least amount of gets to the api providers. 
 
-### `npm test`
+## In Action
+![Demo](readme_images/demo.gif?raw=true)
+ 
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* React
+* ANTD
+* ReCharts.js
+* Node.js
+* Express
+* Stock & News API
 
-### `npm run build`
+## Frontend Functionality
+![Front end design](readme_images/components.png?raw=true)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Made sure to follow React’s one-way data flow concept.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Backend Functionality
+![backend flow](readme_images/backend_flow.png?raw=true)
+\
+![routes](readme_images/routes.png?raw=true)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Notable Node modules Used
+* [apicache](https://www.npmjs.com/package/apicache) - long and short term caching for both faster gets and less stress on the api server.
+* [node-fetch](https://www.npmjs.com/package/node-fetch) - proxying api calls
+* [cors](https://www.npmjs.com/package/cors) - to enable cross domain domain requests (react and express)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Insallation & Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone repo
+2. cd react-stock-web-app 
+3. npm install
+4. get free api keys from [AlphaVantage](https://www.alphavantage.co) and [NewsAPI](https://newsapi.org)
+5. Place keys into server/config/config.json with the following format: 
+   ````
+   {
+    "alphaVantageKey" : "******************",
+    "newsAPIkey":"***************************************"
+   }
+   ````
+  6. npm run dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Todo
+* Compare current viewed grpah with popular market indexes 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Current Issues
 
-## Learn More
+Due to the apis being free there is a very very limited amount of requests that I can make. In order to best accomodate for this I implement the apicache, but regardless the server will often not give me any data and an error is thrown by the program.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+As much as I want to host the application I don't think it'd properly debut my product, since the api calls commonly get rejected. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Alphavantage does not provide popular market indexes (e.g. SPY, Nasdaq DOW J, etc) so I used the area for sector performance. Would be awesome to have market indexes instead.
