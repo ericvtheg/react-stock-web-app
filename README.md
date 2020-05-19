@@ -29,7 +29,7 @@ Made sure to follow React’s one-way data flow concept.
 
 ## Backend Functionality
 ![backend flow](readme_images/backend_flow.png?raw=true)
-\
+routes \
 ![routes](readme_images/routes.png?raw=true)
 
 
@@ -54,7 +54,7 @@ Made sure to follow React’s one-way data flow concept.
   6. npm run dev
 
 ## Todo
-* Compare current viewed grpah with popular market indexes 
+* Compare current viewed graph with popular market indexes 
 
 ## Current Issues
 
