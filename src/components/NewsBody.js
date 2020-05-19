@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col, Avatar } from 'antd';
 import { AlignLeftOutlined } from '@ant-design/icons';
-import {alertError} from '../helpers/alert';
+import { alertError } from '../helpers/alert';
 
 class NewsBody extends React.Component {
   constructor(props) {

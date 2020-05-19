@@ -3,7 +3,7 @@ import { Card, Row, Col, Statistic } from 'antd';
 import { TickerGraph } from './TickerGraph';
 import { isGain } from '../helpers/isGain';
 import { formatNumber } from '../helpers/formatNumber';
-import {alertError} from '../helpers/alert';
+import { alertError } from '../helpers/alert';
 
 class TickerBody extends React.Component {
   constructor(props) {
