@@ -13,10 +13,10 @@ class SectorsBody extends React.Component {
   }
   componentDidMount() {
     this.fetchSectorData();
-    // this.timerID = setInterval(
-    // () => this.fetchSectorData(),
-    // 60000
-    // );
+    this.timerID = setInterval(
+      () => this.fetchSectorData(),
+      60000
+      );
   }
 
   fetchSectorData(){

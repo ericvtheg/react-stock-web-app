@@ -8,7 +8,7 @@ class CardBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stockTicker: "AAPL"
+      stockTicker: "FB"
     };
   }
   render(){

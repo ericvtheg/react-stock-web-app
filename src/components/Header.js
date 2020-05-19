@@ -24,7 +24,7 @@ function Header(props){
             style={{
               fontSize: 12,
             }}
-            placeholder="AAPL"
+            placeholder="TSLA"
             onSearch={props.searchFunction} enterButton
           />
           </AutoComplete>

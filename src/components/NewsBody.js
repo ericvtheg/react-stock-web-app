@@ -14,10 +14,10 @@ class NewsBody extends React.Component {
   }
   componentDidMount() {
     this.fetchNewsData()
-    // this.timerID = setInterval(
-    //     () => this.fetchNewsData(),
-    //     600000
-    //   );
+    this.timerID = setInterval(
+        () => this.fetchNewsData(),
+        600000
+      );
   }
 
   fetchNewsData(){
