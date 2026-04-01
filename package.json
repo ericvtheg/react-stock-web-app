@@ -11,13 +11,13 @@
     "apicache": "^1.5.3",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.22.1",
     "moment": "^2.25.3",
     "node-cache": "^5.1.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "recharts": "^1.8.5"
   },
   "scripts": {
